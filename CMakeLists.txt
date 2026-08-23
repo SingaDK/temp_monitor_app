@@ -13,6 +13,8 @@ add_executable(temperature_monitor
     src/hal_i2c_mock.c
     src/hal_timer_mock.c
     src/eeprom_config.c
+    src/temperature_monitor.c
+    src/led_driver.c
 )
 
 target_include_directories(temperature_monitor PRIVATE include)

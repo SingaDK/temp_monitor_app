@@ -16,7 +16,14 @@ endif()
 add_library(fakeit INTERFACE)
 target_include_directories(fakeit INTERFACE ${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(unit_tests test_dummy.cpp)
+add_executable(unit_tests
+    test_temp_monitor.cpp
+    ../src/sensor_strategy.c
+    ../src/temperature_monitor.c
+    ../src/eeprom_config.c
+    ../src/hal_i2c_mock.c
+)
+
 target_link_libraries(unit_tests PRIVATE Catch2::Catch2WithMain fakeit)
 
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)

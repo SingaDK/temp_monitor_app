@@ -8,7 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(temperature_monitor
     src/main.c
+    src/hal_adc_mock.c
+    src/hal_gpio_mock.c
     src/hal_i2c_mock.c
+    src/hal_timer_mock.c
     src/eeprom_config.c
 )
 

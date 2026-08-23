@@ -15,6 +15,8 @@ add_executable(temperature_monitor
     src/eeprom_config.c
     src/temperature_monitor.c
     src/led_driver.c
+    src/timer_isr.c
+    src/sensor_strategy.c
 )
 
 target_include_directories(temperature_monitor PRIVATE include)

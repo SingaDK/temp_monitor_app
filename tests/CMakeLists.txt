@@ -24,6 +24,7 @@ add_executable(unit_tests
     ../src/hal_i2c_mock.c
 )
 
+target_include_directories(unit_tests PRIVATE ../include)
 target_link_libraries(unit_tests PRIVATE Catch2::Catch2WithMain fakeit)
 
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)

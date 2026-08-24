@@ -11,12 +11,15 @@
 #include "temp_monitor.hpp"
 #include "temp_sensor.hpp"
 
-volatile uint16_t s_latest_sample = 0;
-
-void TimerIsrHandler(const Adc &adc)
+class TimerIsr
 {
-    s_latest_sample = adc.Read();
-}
+public:
+    void Handler(const Adc &adc) { m_latest = adc.Read(); }
+    uint16_t Latest() const { return m_latest; }
+
+private:
+    volatile uint16_t m_latest = 0;
+};
 
 const char *StateName(TempState state)
 {
@@ -46,16 +49,17 @@ int main()
     Timer timer;
     TempMonitor monitor;
     LedDriver led(gpio);
+    TimerIsr timerIsr;
 
-    timer.Init(100); // configure the 100us sampling period (symbolic on PC demo)
+    timer.Init(100);
 
     const uint16_t raw_value = 20;
 
     adc.SetValue(raw_value);
 
-    TimerIsrHandler(adc); // simulates one 100us timer tick
+    timerIsr.Handler(adc);
 
-    int16_t tenths = sensor->ToTenthsDegC(s_latest_sample);
+    int16_t tenths = sensor->ToTenthsDegC(timerIsr.Latest());
     TempState state = monitor.Evaluate(tenths);
 
     std::cout << "raw_value=" << raw_value << "  temp=" << (tenths / 10) << "." << (tenths % 10)

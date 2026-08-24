@@ -13,4 +13,6 @@ bool I2c::Read(uint8_t device_addr, uint8_t reg, uint8_t *buf, size_t len) const
         return false;
     }
     std::memcpy(buf, &s_contents[reg], len);
+
+    return true;
 }

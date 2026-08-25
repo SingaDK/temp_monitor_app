@@ -10,7 +10,6 @@ HAL layer mocked.
 
 - **CMake** — build system (see [CMakeLists.txt](CMakeLists.txt))
 - **Catch2** — unit test framework (see [tests/](tests))
-- **FakeIt** — mocking framework for the HAL layer (see [tests/](tests))
 
 # Folder Structure
 
